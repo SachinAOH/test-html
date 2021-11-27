@@ -1,0 +1,259 @@
+
+<!doctypehtml><title>HTML Editor</title><meta content="width=device-width,initial-scale=1,maximum-scale=1"name=viewport><style>section{width:100%}iframe,section,textarea{height:100%}*{margin-left:0}*{margin-bottom:0}*{margin-right:0}section{position:fixed}section{top:0}*{margin-top:0}section{left:0}section{right:0}section{bottom:0}*{box-sizing:border-box}*{resize:none}::placeholder,textarea{color:#fff}textarea{background-color:#566d8f}*{outline:0}*{border-left-width:0}textarea{padding-left:.5pc}*{border-bottom-width:0}textarea{padding-bottom:.5pc}*{border-right-width:0}*{border-top-width:0}textarea{padding-right:.5pc}*{border-left-style:none}textarea{padding-top:.5pc}iframe,textarea{width:50%}*{border-bottom-style:none}textarea{border-right-width:.020833333in}textarea{border-right-style:solid}*{border-right-style:none}textarea{border-right-color:#1b326c}*{border-top-style:none}textarea{border-image:none}textarea{line-height:1.7}*{border-left-color:currentColor}*{border-bottom-color:currentColor}*{border-right-color:currentColor}*{border-top-color:currentColor}*{border-image:none}iframe{float:right}</style><section><textarea id=editor onkeyup=intp()>
+
+
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* { font-family: 'Roboto', sans-serif; }  
+html, body {    
+} 
+    
+     * { margin: 0; box-sizing: border-box; }
+   
+    #container { z-index: 1; 
+      display: block; 
+      -webkit-transition: opacity 1.5s ease-in-out;
+      -moz-transition: opacity 1.5s ease-in-out;
+      -ms-transition: opacity 1.5s ease-in-out;
+      -o-transition: opacity 1.5s ease-in-out;
+      transition: opacity 1.5s ease-in-out;
+      padding-bottom: 55px;  
+      width: 97%;
+      max-width: 550px;
+      margin: auto; 
+      background-color: #fff;
+      margin-top: 6px; 
+    
+    }
+    
+      .question {   text-align: justify;   
+      width: 99%;
+      font-size: 25px;
+      cursor: pointer;
+      margin-bottom: 8px;
+      color: #000;
+      padding: 5px;
+      cursor: pointer;
+      }
+    
+    
+      .answer { 
+        width: 100%;  
+        color: #000000;  
+        background: #f7fcff;  
+        border: 1px solid #ccc;  
+        border-radius: 5px;
+        font-size: 17px;
+        margin-bottom: 12px!important;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        justify-content: space-between;
+        display: inline-block;
+      margin: auto;
+      }
+    
+.op_num { color: #fff; background-color: #132353; padding: 8px 15px; 
+  border-radius: 4px 0 0 4px;  border: 1px solid #132353; }
+    .option-para{ margin: 0;  display: inline-block;   padding: 8px 15px; }
+    .correct {  color: white; background-color: #047c31!important; border: 1px solid #000; 
+ } 
+    .incorrect {  color: white; background-color: #ff3333!important; border: 1px solid #000; }
+    
+    
+    .row-container { padding: 5px; }
+    .row-container:after {
+      content: "";
+      display: table; 
+      clear: both;
+    }
+    .col-container { float: left; width: 50%; }  
+    
+    </style>  
+    
+    
+    
+    <body onload="bodyexek()"> 
+
+    
+     <section>
+      <hr style="border: 0; height: 1px; background-color: #fff;" />
+
+    <section id="container" style="background-color: #fff; min-height: 450px;">
+    
+   
+    <section class="row-container ques-timer">
+    <div class="col-container">
+    <span id="ques_no">01</span>/<span id="ques_nos"></span>
+    </div>
+      
+    </section>
+
+      <hr style="border: 0; height: 1px; background-color: #e5e5e5;" /> 
+    
+    
+    
+    
+        <span class="no_dp" id="update_ques"></span>
+    <span class="no_dp0" onclick="setTimeout(update_ques, 350);"></span>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    
+    
+    
+
+<div style="background-color: #f7fcff; padding: 15px 10px 12px 10px; border-bottom: 1px solid #ccc;">
+    <div id="question" class="qtext question"></div>
+    </div>
+    
+        <section style="padding: 15px 10px;">
+    <div data-n="0" onclick="answerClicked(this.getAttribute('data-n'), this), setTimeout(update_ques, 350);" class="answer"><span class="op_num">A</span>
+    <p class="option-para" id="0"></p></div>
+    
+    <div data-n="1" onclick="answerClicked(this.getAttribute('data-n'), this), setTimeout(update_ques, 350);" class="answer"><span class="op_num">B</span>
+    <p class="option-para" id="1"></p></div>
+    
+    <div data-n="2" onclick="answerClicked(this.getAttribute('data-n'), this), setTimeout(update_ques, 350);" class="answer"><span class="op_num">C</span>
+    <p class="option-para" id="2"></p></div>
+    
+    <div data-n="3" onclick="answerClicked(this.getAttribute('data-n'), this), setTimeout(update_ques, 350);" class="answer"><span class="op_num">D</span>
+    <p class="option-para" id="3"></p></div>
+       </section>   
+
+    </section>
+</section>
+    
+      <script>
+          // QUESTION 01 
+    var Quiz = [{"question": "Which of the following is an Operating System :",
+    "answers":["Microsoft Excel","Microsoft Windows","Microsoft Word", "Microsoft Access"],
+    "Correct":1},
+    
+   {"question": "A dial-up connection enables to connect to ISP using a",
+    "answers":["Modem","Router","Gateways", "Bridge"],
+    "Correct":0},
+    
+   {"question": "DNS is an Internet service that translates domain names to or from _________ ",
+    "answers":["MAC address","IP address","both of these", "none of these"],
+    "Correct":2},
+    
+   {"question": "What is used to identify a user who returns to a Website?",
+    "answers":["Cookies","Plug-ins","Scripts", "ASPs"],
+    "Correct":0},
+    
+   {"question":"Which of the following is not an output device :",
+    "answers":["Plotter","Printer","Scanner", "Monitor"],
+    "Correct":2}];
+    
+    </script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', finishLoading );
+    
+    var question = document.getElementById("question");
+    var container = document.getElementById("container");
+    var answer = document.getElementsByClassName("option-para");
+    
+    
+    var all = Quiz.length;
+    var state = {"score": 0};
+    function finishLoading() {
+      updatePosition();
+    }
+    function buttonLoaded() {} 
+    function answerClicked(id, obj) {
+      container.style.opacity = 0;
+      if(id == state["current"].Correct) {
+          changeColor(true, obj);
+        }else{
+          changeColor(false, obj);
+        }
+      
+      setTimeout(function(){
+        if(id == state["current"].Correct) {
+          updatePosition(true);
+        }else{
+          updatePosition(false);
+        }},
+        500);
+    }
+    
+       // DOM which is used to hide the container by default
+    function updatePosition(inc) {
+      var score = state["score"];
+      if(Quiz.length <1){
+        state = { 
+          "current": current,
+          "score": (inc ? (++score) : score) 
+        };
+     
+        // alert which will be displayed as result (score)
+
+     alert("YOU ANSWERED CORRECTLY " + score + " OUT OF " + all + " QUESTIONS");
+      document.getElementById("finished_container").style.display = "block";
+    
+        setTimeout(setEndText(), 250);
+        setTimeout((endObj.style.opacity = 1), 500);
+        
+      }else{    
+        var index = Math.floor(Math.random()*Quiz.length);
+        if (index > -1){
+              var current = Quiz[index];
+        }
+        state = {
+          "current": current,
+          "score": (inc ? (++score) : score)
+        }; 
+        question.innerHTML = current.question;
+          for (i = 0; i < answer.length; i++) { 
+          answer[i].innerHTML = current.answers[i];
+          resetColors(i);
+        }
+        Quiz.splice(index, 1);    
+        container.style.opacity = 1; 
+      } 
+    } 
+     
+    function setEndText(){ 
+      container.style.display = "none";  
+        // DOM container which will be displayed after alert (score)
+    
+    }
+    
+    function changeColor(mode, obj) {
+      if(mode){
+        obj.classList.add("correct");
+      }else{
+        obj.classList.add("incorrect");
+      }
+    }
+    function resetColors(index){
+      if(index >= 0){
+        var objIn = answer[index].parentElement; 
+        
+        if(objIn.classList.contains("correct")){
+          objIn.classList.remove("correct");
+        }else if (objIn.classList.contains("incorrect")) {
+          objIn.classList.remove("incorrect");
+        }
+      }
+    }
+    
+    </script>
+    
+    
+    <script>
+     document.getElementById("ques_nos").innerHTML = all;
+    function update_ques() { document.getElementById("update_ques").click();  }  
+    $('#update_ques').click(function () {
+        $('#ques_no').text(function (i, n) {
+            n = +n;
+            return (n < 9 ? "0" : "") + (n + 1);
+        }); 
+    });
+    </script>
+    
+  
+      
+      </textarea><iframe id=viewer></iframe></section><script>var _0x2251=["1138476aePKzK","38cjOPAZ","1764411auyysB","value","1485112OPJDEv","2HsPhKo","351498IRjgbM","srcdoc","91817QksoIf","getElementById","11SQunFZ","152084bwpvPx","viewer","editor","32174wJAVdK"],_0x2cf6=function(t,e){return _0x2251[t-=440]};function intp(){var t=_0x2cf6,e=document[t(452)](t(441))[t(446)];document[t(452)](t(440))[t(450)]=e}!function(e,t){for(var n=_0x2cf6;;)try{if(866582===-parseInt(n(443))+parseInt(n(442))*parseInt(n(444))+parseInt(n(447))+parseInt(n(451))+-parseInt(n(453))*-parseInt(n(454))+-parseInt(n(448))*parseInt(n(449))+-parseInt(n(445)))break;e.push(e.shift())}catch(t){e.push(e.shift())}}(_0x2251)</script> 
